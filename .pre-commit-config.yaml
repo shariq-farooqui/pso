@@ -1,0 +1,26 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+      - id: name-tests-test
+      - id: check-merge-conflict
+      - id: requirements-txt-fixer
+
+  - repo: https://github.com/google/yapf
+    rev: v0.40.0
+    hooks:
+      - id: yapf
+        name: yapf (python)
+        types: [python]
+        additional_dependencies: [toml]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.284
+    hooks:
+      - id: ruff
+        name: ruff (python)
