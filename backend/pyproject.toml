@@ -1,0 +1,29 @@
+[project]
+name = "pso"
+description = "Particle Swarm Optimization Learning Tool"
+authors = [
+    {name = "Shariq Farooqui", email = "shariq-farooqui@users.noreply.github.com"},
+]
+version = "0.0.0"
+requires-python = ">=3.10.12"
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.yapf]
+based_on_style = "pep8"
+column_limit = 120
+
+[tool.yapfignore]
+ignore_patterns = ["Dockerfile", "Makefile", "docker-compose*.yml", "*requirements.txt",]
+
+[tool.ruff]
+select = ["E", "F", "I", "COM", "Q"]
+line-length = 120
+
+exclude = [
+    "__init__.py",
+]
+
+[tool.ruff.isort]
+combine-as-imports = false
