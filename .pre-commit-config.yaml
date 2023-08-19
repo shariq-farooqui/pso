@@ -8,6 +8,7 @@ repos:
       - id: trailing-whitespace
       - id: mixed-line-ending
       - id: name-tests-test
+        args: ["--pytest-test-first"]
       - id: check-merge-conflict
       - id: requirements-txt-fixer
 
@@ -24,4 +25,4 @@ repos:
     hooks:
       - id: ruff
         name: ruff (python)
-        args: ["--config", "backend/pyproject.toml"]
+        args: ["--config=backend/pyproject.toml", "--ignore=I001"]
