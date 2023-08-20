@@ -4,8 +4,7 @@ import numpy as np
 
 
 class Particle:
-    """
-    A particle in the swarm.
+    """A particle in the swarm.
 
     Attributes:
         problem_type (str): The type of optimization problem, either "min" or "max".
@@ -18,8 +17,7 @@ class Particle:
     """
 
     def __init__(self, problem_type: str) -> None:
-        """
-        Initializes a new Particle object.
+        """Initializes a new Particle object.
 
         Args:
             problem_type (str): The type of optimization problem, either "min" or "max".
@@ -33,8 +31,7 @@ class Particle:
         self.neighbours = []
 
     def evaluate(self, objective_function: Callable) -> None:
-        """
-        Evaluates the particle's current position and updates its best position and score if necessary.
+        """Evaluates the particle's current position and updates its best position and score if necessary.
 
         Args:
             objective_function (Callable): The objective function to evaluate the particle's position with.

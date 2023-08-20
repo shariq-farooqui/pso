@@ -2,8 +2,7 @@ import numpy as np
 
 
 def quadratic_1d(position: np.ndarray) -> float:
-    """
-    Calculates the value of the quadratic function for a 1-dimensional position.
+    """Calculates the value of the quadratic function for a 1-dimensional position.
 
     Args:
         position (np.ndarray): The position for which the function value is to be calculated.
@@ -20,8 +19,7 @@ def quadratic_1d(position: np.ndarray) -> float:
 
 
 def quadratic_2d(position: np.ndarray) -> float:
-    """
-    Calculates the value of the quadratic function for a 2-dimensional position.
+    """Calculates the value of the quadratic function for a 2-dimensional position.
 
     Args:
         position (np.ndarray): The position for which the function value is to be calculated.
@@ -38,8 +36,7 @@ def quadratic_2d(position: np.ndarray) -> float:
 
 
 def sphere(position: np.ndarray) -> float:
-    """
-    Calculates the value of the sphere function for a given position.
+    """Calculates the value of the sphere function for a given position.
 
     Args:
         position (np.ndarray): The position for which the function value is to be calculated.
