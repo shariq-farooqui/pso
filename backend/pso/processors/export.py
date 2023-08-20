@@ -53,7 +53,7 @@ class MongoDBExporter(Processor[Swarm]):
         Swarm
             The processed swarm.
         """
-        if swarm.current_iteration == swarm.max_iterations:
+        if swarm.current_iteration == (swarm.max_iterations - 1):
             swarm.finished_at = datetime.now().timestamp()
 
         document = {
