@@ -11,14 +11,17 @@ class InitialiseGlobalTopology(Processor[Swarm]):
     every particle in the swarm as a neighbour to every other particle in the
     swarm. This process is only used once, at the start of the optimisation.
 
-    Attributes:
-        swarm (Swarm): The swarm to initialize the topology for.
-
-    Returns:
-        Swarm: The swarm with the initialized topology.
     """
 
     def process(self, swarm: Swarm) -> Swarm:
+        """Initializes the global topology for the swarm.
+
+        Args:
+            swarm (Swarm): The swarm object to initialize the global topology for.
+
+        Returns:
+            Swarm: The updated swarm object with the global topology initialized.
+        """
         if not swarm.topology_initialised:
             topology = GlobalTopology(swarm.particles)
             for i, particle in enumerate(swarm.particles):
@@ -34,14 +37,18 @@ class InitialiseRingTopology(Processor[Swarm]):
     adjacent particles in the swarm as neighbours. This process is only used
     once, at the start of the optimisation.
 
-    Attributes:
-        swarm (Swarm): The swarm to initialize the topology for.
-
-    Returns:
-        Swarm: The swarm with the initialized topology.
     """
 
     def process(self, swarm: Swarm) -> Swarm:
+        """Initializes the ring topology for the swarm.
+
+        Args:
+            swarm (Swarm): The swarm to initialize the ring topology for.
+
+        Returns:
+            Swarm: The swarm with the ring topology initialized.
+
+        """
         if not swarm.topology_initialised:
             topology = RingTopology(swarm.particles)
             for i, particle in enumerate(swarm.particles):

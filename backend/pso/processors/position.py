@@ -10,11 +10,6 @@ class InitialisePosition(Processor[Swarm]):
 
     This processor is only used once, at the start of the optimisation process.
 
-    Args:
-        Processor: A generic Processor class that takes a Swarm type.
-
-    Returns:
-        Swarm: The Swarm object with initialised positions.
     """
 
     def process(self, swarm: Swarm) -> Swarm:
@@ -36,11 +31,6 @@ class InitialisePosition(Processor[Swarm]):
 class UpdatePosition(Processor[Swarm]):
     """Updates the position of particles in the swarm.
 
-    Args:
-        Processor: A generic Processor class that takes a Swarm type.
-
-    Returns:
-        Swarm: The Swarm object with updated positions.
     """
 
     def process(self, swarm: Swarm) -> Swarm:

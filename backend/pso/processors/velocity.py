@@ -10,11 +10,6 @@ class InitialiseVelocity(Processor[Swarm]):
 
     This processor is only used once, at the start of the optimisation process.
 
-    Args:
-        Processor: A generic Processor class that takes in a Swarm type.
-
-    Returns:
-        Swarm: The swarm with initialised velocities for its particles.
     """
 
     def process(self, swarm: Swarm) -> Swarm:
@@ -36,11 +31,6 @@ class InitialiseVelocity(Processor[Swarm]):
 class UpdateVelocity(Processor[Swarm]):
     """Updates the velocity of particles in a swarm.
 
-    Args:
-        Processor: A generic Processor class that takes in a Swarm type.
-
-    Returns:
-        Swarm: The swarm with updated velocities for its particles.
     """
 
     def process(self, swarm: Swarm) -> Swarm:
