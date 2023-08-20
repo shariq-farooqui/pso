@@ -30,56 +30,67 @@ class ConvergenceCalculator:
         },
     }
 
-    def __init__(self, function_name: str, dimensions: int):
-        """
-        Parameters
-        ----------
-        function_name : str
-            The name of the function being optimized.
-        dimensions : int
-            The number of dimensions of the function being optimized.
+    def __init__(self, function_name: str, dimensions: int, tolerance: float = 1e-6):
+        """ Constructs a new ConvergenceCalculator instance.
 
-        Raises
-        ------
-        ValueError
-            If the function name is not recognized.
+        Args:
+            function_name (str): The name of the function being optimized.
+            dimensions (int): The number of dimensions of the function being optimized.
+            tolerance (float, optional): The tolerance of the convergence check. Defaults to 1e-6.
         """
         if function_name not in self.OPTIMAL_VALUES:
             raise ValueError(f"Unknown function: {function_name}")
 
         self.function_name = function_name
         self.dimensions = dimensions
+        self.tolerance = tolerance
         self.optimal_position = self.OPTIMAL_VALUES[function_name]["optimal_position"](dimensions)
         self.optimal_score = self.OPTIMAL_VALUES[function_name]["optimal_score"]
 
     def precision_score(self, best_score: float) -> float:
+        """Calculates the precision score of the particle swarm optimization algorithm.
+
+        Args:
+            best_score (float): The best score achieved by the particle swarm optimization algorithm.
+
+        Returns:
+            float: The precision score of the particle swarm optimization algorithm.
         """
-        Calculates the precision score of the particle swarm optimization algorithm.
 
-        Parameters
-        ----------
-        best_score : float
-            The best score achieved by the particle swarm optimization algorithm.
+        return float(abs(best_score - self.optimal_score))
 
-        Returns
-        -------
-        float
-            The precision score of the particle swarm optimization algorithm.
+    def precision_position(self, best_position: np.ndarray) -> float:
+        """Calculates the precision position of the particle swarm optimization algorithm.
+
+        Args:
+            best_position (numpy.ndarray): The best position achieved by the particle swarm optimization algorithm.
+
+        Returns:
+            float: The precision position of the particle swarm optimization algorithm,
+                represented as the Euclidean distance from the optimal position.
         """
-        return abs(best_score - self.optimal_score)
+        return float(np.linalg.norm(best_position - self.optimal_position))
 
-    def precision_position(self, best_position: np.ndarray) -> np.ndarray:
+    def check_convergence(self, best_score: float):
+        """Checks whether the particle swarm optimization algorithm has converged.
+
+        Args:
+            best_score (float): The best score achieved by the particle swarm optimization algorithm.
+
+        Returns:
+            bool: Whether the particle swarm optimization algorithm has converged.
         """
-        Calculates the precision position of the particle swarm optimization algorithm.
+        return abs(best_score - self.optimal_score) <= self.tolerance
 
-        Parameters
-        ----------
-        best_position : numpy.ndarray
-            The best position achieved by the particle swarm optimization algorithm.
+    def convergence_rate(self, convergence_iteration: int, max_iterations: int):
+        """Calculates proportion of iterations used to converge.
 
-        Returns
-        -------
-        numpy.ndarray
-            The precision position of the particle swarm optimization algorithm.
+        Args:
+            convergence_iteration (int): The iteration at which the particle swarm optimization algorithm converged.
+            max_iterations (int): The maximum number of iterations allowed for the particle swarm optimization
+                algorithm.
+
+        Returns:
+            float: The proportion of iterations used to converge.
         """
-        return np.linalg.norm(best_position - self.optimal_position)
+        return (convergence_iteration / max_iterations) * 100

@@ -29,10 +29,9 @@ class MongoDBExporter(Processor[Swarm]):
         """
         Constructs a new MongoDBExporter instance.
 
-        Parameters
-        ----------
-        collection : str, optional
-            The name of the MongoDB collection to use (default is "runs").
+        Args:
+            collection (str, optional): The name of the MongoDB collection to export to. Defaults to "runs".
+
         """
         self.database_url = os.environ.get("DATABASE_URL")
         self.client = AsyncIOMotorClient(self.database_url)
@@ -43,15 +42,11 @@ class MongoDBExporter(Processor[Swarm]):
         """
         Processes the given swarm and exports the data to MongoDB.
 
-        Parameters
-        ----------
-        swarm : Swarm
-            The swarm to process.
+        Args:
+            swarm (Swarm): The swarm to process.
 
-        Returns
-        -------
-        Swarm
-            The processed swarm.
+        Returns:
+            Swarm: The processed swarm.
         """
         if swarm.current_iteration == (swarm.max_iterations - 1):
             swarm.finished_at = datetime.now().timestamp()
@@ -86,6 +81,16 @@ class MongoDBExporter(Processor[Swarm]):
                 "best_position": particle.best_position.tolist(),
                 "best_score": particle.best_score,
             } for idx, particle in enumerate(swarm.particles)],
+            "score_precision":
+            swarm.score_precision,
+            "position_precision":
+            swarm.position_precision,
+            "converged":
+            swarm.converged,
+            "convergence_iteration":
+            swarm.convergence_iteration,
+            "convergence_rate":
+            swarm.convergence_rate,
         }
 
         await self.collection.insert_one(document)
