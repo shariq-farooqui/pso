@@ -119,9 +119,16 @@ def test_swarm_evaluator(swarm):
 
     assert np.isinf(swarm.global_best_score)
     assert swarm.global_best_position is None
+    assert swarm.score_precision == []
+    assert swarm.position_precision == []
     swarm = processor.process(swarm)
+
     assert swarm.global_best_score is not None
     assert swarm.global_best_position is not None
+    assert len(swarm.score_precision) == 1
+    assert len(swarm.position_precision) == 1
+    assert isinstance(swarm.score_precision[0], float)
+    assert isinstance(swarm.position_precision[0], float)
 
 
 def test_velocity_update(swarm):
