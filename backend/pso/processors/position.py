@@ -8,6 +8,8 @@ from .processor import Processor
 class InitialisePosition(Processor[Swarm]):
     """Initialises the position of particles in the swarm.
 
+    This processor is only used once, at the start of the optimisation process.
+
     Args:
         Processor: A generic Processor class that takes a Swarm type.
 
