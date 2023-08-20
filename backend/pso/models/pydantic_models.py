@@ -1,3 +1,5 @@
+import os
+
 from pydantic import BaseModel
 
 
@@ -51,3 +53,17 @@ class ObjectiveEvaluationRequest(BaseModel):
     """
     function_name: str
     position: list[float]
+
+
+class AppSettings(BaseModel):
+    """A Pydantic model representing the application settings.
+
+    Attributes:
+        DATABASE_URL (str): The URL of the database.
+        PSO_VERSION (str): The version of the PSO algorithm.
+        BUILD_ENVIRONMENT (str): The environment in which the application is running.
+    """
+
+    DATABASE_URL: str = os.environ.get("DATABASE_URL")
+    PSO_VERSION: str = os.environ.get("PSO_VERSION")
+    BUILD_ENVIRONMENT: str = os.environ.get("BUILD_ENVIRONMENT")

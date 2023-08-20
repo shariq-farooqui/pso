@@ -1,1 +1,1 @@
-from .pydantic_models import AnimationRequest, SwarmConfig, ObjectiveEvaluationRequest
+from .pydantic_models import AnimationRequest, SwarmConfig, ObjectiveEvaluationRequest, AppSettings
