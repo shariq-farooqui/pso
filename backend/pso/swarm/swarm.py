@@ -55,7 +55,7 @@ class Swarm:
                 Defaults to None.
         """
         self.run_id = str(uuid.uuid4())
-        self.current_iteration = 1
+        self.current_iteration = 0
         self.created_at = datetime.now().timestamp()
         self.finished_at = None
         self.max_iterations = max_iterations
