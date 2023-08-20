@@ -48,14 +48,14 @@ class PSORunner(PipelineRunner[Swarm]):
         self.swarm = swarm
         self.logger = get_logger(__name__)
 
-    def run(self) -> Swarm:
+    async def run(self) -> Swarm:
         """Runs the PSO pipeline on the swarm.
 
         Returns:
             The swarm after running the pipeline.
         """
         for i in range(self.swarm.max_iterations):
-            self.swarm = self.pipeline.run(self.swarm)
+            self.swarm = await self.pipeline.run(self.swarm)
             self.swarm.current_iteration += 1
         self.logger.info(f"Best position: {self.swarm.global_best_position}")
         self.logger.info(f"Best score: {self.swarm.global_best_score}")

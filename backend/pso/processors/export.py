@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 
 from pso.swarm import Swarm
 
@@ -35,11 +35,11 @@ class MongoDBExporter(Processor[Swarm]):
             The name of the MongoDB collection to use (default is "runs").
         """
         self.database_url = os.environ.get("DATABASE_URL")
-        self.client = MongoClient(self.database_url)
+        self.client = AsyncIOMotorClient(self.database_url)
         self.database = self.client.pso
         self.collection = self.database[collection]
 
-    def process(self, swarm: Swarm) -> Swarm:
+    async def process(self, swarm: Swarm) -> Swarm:
         """
         Processes the given swarm and exports the data to MongoDB.
 
@@ -88,5 +88,5 @@ class MongoDBExporter(Processor[Swarm]):
             } for idx, particle in enumerate(swarm.particles)],
         }
 
-        self.collection.insert_one(document)
+        await self.collection.insert_one(document)
         return swarm
