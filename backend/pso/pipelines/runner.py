@@ -56,6 +56,7 @@ class PSORunner(PipelineRunner[Swarm]):
         """
         for i in range(self.swarm.max_iterations):
             self.swarm = self.pipeline.run(self.swarm)
+            self.swarm.current_iteration += 1
         self.logger.info(f"Best position: {self.swarm.global_best_position}")
         self.logger.info(f"Best score: {self.swarm.global_best_score}")
         return self.swarm

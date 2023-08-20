@@ -89,5 +89,4 @@ class MongoDBExporter(Processor[Swarm]):
         }
 
         self.collection.insert_one(document)
-        swarm.current_iteration += 1
         return swarm
