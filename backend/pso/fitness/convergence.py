@@ -28,6 +28,14 @@ class ConvergenceCalculator:
             "optimal_position": lambda dim: np.zeros(dim),
             "optimal_score": 0,
         },
+        "quadratic_1d": {
+            "optimal_position": lambda dim: np.zeros(1),
+            "optimal_score": 0,
+        },
+        "quadratic_2d": {
+            "optimal_position": lambda dim: np.zeros(2),
+            "optimal_score": 0,
+        },
     }
 
     def __init__(self, function_name: str, dimensions: int, tolerance: float = 1e-6):
@@ -80,7 +88,7 @@ class ConvergenceCalculator:
         Returns:
             bool: Whether the particle swarm optimization algorithm has converged.
         """
-        return abs(best_score - self.optimal_score) <= self.tolerance
+        return bool(abs(best_score - self.optimal_score) <= self.tolerance)
 
     def convergence_rate(self, convergence_iteration: int, max_iterations: int):
         """Calculates proportion of iterations used to converge.

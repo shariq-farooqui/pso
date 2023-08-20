@@ -134,7 +134,7 @@ def test_swarm_evaluator(swarm):
     assert isinstance(swarm.score_precision[0], float)
     assert isinstance(swarm.position_precision[0], float)
     assert swarm.converged is True
-    assert swarm.convergence_iteration == 0
+    assert swarm.convergence_iteration == 1
     assert swarm.convergence_rate == 0
 
 

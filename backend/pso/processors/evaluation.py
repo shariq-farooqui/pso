@@ -54,8 +54,9 @@ class SwarmEvaluator(Processor[Swarm]):
         convergence = ConvergenceCalculator(swarm.objective_function.__name__, swarm.dimensions)
         swarm.score_precision.append(convergence.precision_score(best_score))
         swarm.position_precision.append(convergence.precision_position(best_position))
-        swarm.converged = convergence.check_convergence(best_score)
-        if swarm.converged:
-            swarm.convergence_iteration = swarm.current_iteration
+        if swarm.converged is False:
+            swarm.converged = convergence.check_convergence(best_score)
+        if swarm.converged and swarm.convergence_iteration is None:
+            swarm.convergence_iteration = swarm.current_iteration + 1
             swarm.convergence_rate = convergence.convergence_rate(swarm.current_iteration, swarm.max_iterations)
         return swarm

@@ -197,3 +197,38 @@ async def evaluate_objective_function(request: ObjectiveEvaluationRequest):
     values = request.position
     result = chosen_function(values)
     return {"result": result}
+
+
+@app.get("/all_runs")
+async def get_all_runs(collection: AsyncIOMotorCollection = Depends(get_collection)):
+    """Returns a list of documents for each run ID, each containing the maximum iteration.
+
+    Args:
+        collection (AsyncIOMotorCollection): The collection instance.
+
+    Returns:
+        list: A list of documents for each run ID with the maximum iteration.
+    """
+    pipeline = [{
+        "$sort": {
+            "iteration": -1,
+        },
+    }, {
+        "$group": {
+            "_id": "$run_id",
+            "max_iteration_document": {
+                "$first": "$$ROOT",
+            },
+        },
+    }, {
+        "$replaceRoot": {
+            "newRoot": "$max_iteration_document",
+        },
+    }, {
+        "$project": {
+            "_id": 0,
+        },
+    }]
+    documents = await collection.aggregate(pipeline).to_list(length=None)
+    print(f"Found {len(documents)} documents")
+    return documents

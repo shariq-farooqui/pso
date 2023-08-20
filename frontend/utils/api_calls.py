@@ -147,3 +147,14 @@ def animate_pso(run_id: str,
     payload = json.dumps(data)
     response = requests.post(url, headers=headers, data=payload)
     return response.json()["filepath"]
+
+
+def all_runs() -> list[dict]:
+    """Get all runs from the database.
+
+    Returns:
+        list[dict]: A list of dictionaries containing details about the PSO runs.
+    """
+    url = f"{BASE_URL}/all_runs"
+    response = requests.get(url)
+    return response.json()
