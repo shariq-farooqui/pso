@@ -1,3 +1,5 @@
+import asyncio
+
 import pytest
 
 from pso.pipelines import PSORunner, StandardGlobalPSOPipeline, StandardRingPSOPipeline
@@ -32,7 +34,7 @@ def test_standard_global_pso_pipeline(swarm):
     pipeline.processors.pop()
 
     runner = PSORunner(pipeline, swarm)
-    swarm = runner.run()
+    swarm = asyncio.run(runner.run())
 
     assert swarm.position_initialised is True
     assert swarm.velocity_initialised is True
@@ -49,7 +51,7 @@ def test_standard_ring_pso_pipeline(swarm):
     pipeline.processors.pop()
 
     runner = PSORunner(pipeline, swarm)
-    swarm = runner.run()
+    swarm = asyncio.run(runner.run())
 
     assert swarm.position_initialised is True
     assert swarm.velocity_initialised is True

@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from asyncio import iscoroutinefunction
 from typing import Generic, TypeVar
 
 from pso.processors import (
@@ -51,7 +52,7 @@ class PSOPipeline(Pipeline[Swarm]):
         """
         self.processors = processors
 
-    def run(self, swarm: Swarm) -> Swarm:
+    async def run(self, swarm: Swarm) -> Swarm:
         """Runs the PSO pipeline on the given swarm of particles.
 
         Args:
@@ -61,7 +62,10 @@ class PSOPipeline(Pipeline[Swarm]):
             The optimized swarm of particles.
         """
         for processor in self.processors:
-            swarm = processor.process(swarm)
+            if iscoroutinefunction(processor.process):
+                swarm = await processor.process(swarm)
+            else:
+                swarm = processor.process(swarm)
         return swarm
 
 
