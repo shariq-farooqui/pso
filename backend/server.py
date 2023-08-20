@@ -124,6 +124,11 @@ async def run(config: SwarmConfig) -> dict:
         "global_best_score": best_score,
         "global_best_position": best_position.tolist(),
         "time_taken_seconds": time_taken.total_seconds(),
+        "score_precision": final_swarm.score_precision,
+        "position_precision": final_swarm.position_precision,
+        "converged": final_swarm.converged,
+        "convergence_iteration": final_swarm.convergence_iteration,
+        "convergence_rate": final_swarm.convergence_rate,
     }
     return response
 
