@@ -41,7 +41,7 @@ def test_swarm_defaults():
     assert swarm.inertia_weight is None
     assert swarm.objective_function is None
     assert isinstance(uuid.UUID(swarm.run_id), uuid.UUID)
-    assert swarm.current_iteration == 1
+    assert swarm.current_iteration == 0
     assert isinstance(swarm.created_at, float)
     assert swarm.finished_at is None
     assert swarm.particles == []
