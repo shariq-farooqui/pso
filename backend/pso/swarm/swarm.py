@@ -28,6 +28,8 @@ class Swarm:
         position_initialised (bool): Whether the particle positions have been initialised.
         velocity_initialised (bool): Whether the particle velocities have been initialised.
         topology_initialised (bool): Whether the swarm topology has been initialised.
+        score_precision (list[float]): The score based precision of the swarm at each iteration.
+        position_precision (list[float]): The position based precision of the swarm at each iteration.
     """
 
     def __init__(self,
@@ -73,6 +75,8 @@ class Swarm:
         self.position_initialised = False
         self.velocity_initialised = False
         self.topology_initialised = False
+        self.score_precision = []
+        self.position_precision = []
 
     def evaluate(self) -> None:
         """Evaluates the objective function for each particle in the swarm."""
