@@ -36,6 +36,10 @@ class ConvergenceCalculator:
             "optimal_position": lambda dim: np.zeros(2),
             "optimal_score": 0,
         },
+        "rastrigin": {
+            "optimal_position": lambda dim: np.zeros(dim),
+            "optimal_score": 0,
+        },
     }
 
     def __init__(self, function_name: str, dimensions: int, tolerance: float = 1e-6):

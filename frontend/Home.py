@@ -9,8 +9,9 @@ st.set_page_config(
 st.title("Home")
 
 st.markdown("""
-    Welcome to the PSO Learning Platform! :wave:
+    Welcome to Visual Learning Aid for PSO! :wave:
     """)
 
+st.subheader("Status Checks")
 st.write(ping())
 st.write(ping_database())

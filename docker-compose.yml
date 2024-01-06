@@ -1,0 +1,43 @@
+version: "3.9"
+
+networks:
+  network:
+
+volumes:
+  media:
+    external: true
+
+services:
+  backend:
+    image: "pso-backend:local"
+    build:
+      context: backend/
+      dockerfile: Dockerfile
+      target: local
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - BUILD_ENVIRONMENT=${BUILD_ENVIRONMENT}
+      - PSO_VERSION=${PSO_VERSION}
+      - DATABASE_URL=${DATABASE_URL}
+    volumes:
+      - "./backend:/app"
+      - "./media:/pso_media"
+    networks:
+      - network
+
+  frontend:
+    image: "pso-frontend:local"
+    build:
+      context: frontend/
+      dockerfile: Dockerfile
+      target: local
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    volumes:
+      - "./frontend:/app"
+      - "./media:/pso_media"
+    networks:
+      - network
