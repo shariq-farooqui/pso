@@ -389,3 +389,5 @@ sketch
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,visualstudiocode,python,react,nextjs,node
+
+media/*.mp4
