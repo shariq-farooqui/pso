@@ -91,6 +91,3 @@ pytest
 └── docker-compose.yml    # Service orchestration
 ```
 
-## License
-
-[MIT License](LICENSE)
